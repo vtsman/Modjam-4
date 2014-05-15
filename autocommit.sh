@@ -1,5 +1,6 @@
-#while true; do
-sleep 5
+while true; do
+echo "pushed to github"
 git commit -am "Auto commit"
 git push origin master
-#done
+sleep 900
+done
