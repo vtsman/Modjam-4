@@ -40,7 +40,7 @@ public class BlockComputer extends Block {
 	@Override
 	public boolean onBlockActivated(World w, int x, int y, int z,
 			EntityPlayer p, int meta, float hX, float hY, float hZ) {
-		/*String[] args = new String[] { "-boot", "cdrom", "-cdrom",
+		String[] args = new String[] { "-boot", "cdrom", "-cdrom",
 				"/Users/Spencer/Documents/SLU.iso" };
 
 		if (pc == null) {
@@ -52,8 +52,8 @@ public class BlockComputer extends Block {
 			PCMonitor mon = new PCMonitor(pc);
 			PCMonitorFrame frame = new PCMonitorFrame("hi", pc, args);
 			frame.validate();
-			frame.setVisible(true);
-			frame.setBounds(100, 100, 760, 500);
+			frame.setVisible(false);
+			//frame.setBounds(100, 100, 760, 500);
 			frame.start();
 			// new Thread(new PCThread(pc)).start();
 			// DefaultVGACard vga = (DefaultVGACard) pc
@@ -66,7 +66,7 @@ public class BlockComputer extends Block {
 		DefaultVGACard vga = (DefaultVGACard) pc
 				.getComponent(DefaultVGACard.class);
 		vga.resizeDisplay(360, 240);
-		System.out.println(vga);*/
+		System.out.println(vga);
 		p.openGui(Base.instance, GuiHandler.computerGuiID, w, x, y, z);
 		
 		return true;

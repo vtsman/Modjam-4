@@ -7,11 +7,14 @@ import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiLabel;
 import net.minecraft.client.gui.GuiScreen;
+import net.minecraft.client.renderer.texture.TextureUtil;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.inventory.ContainerChest;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.util.ResourceLocation;
 
+import org.jpc.emulator.pci.peripheral.DefaultVGACard;
+import org.jpc.emulator.pci.peripheral.VGACard;
 import org.lwjgl.opengl.GL11;
 
 @SideOnly(Side.CLIENT)
@@ -28,9 +31,10 @@ public class GuiComputer extends GuiScreen {
 	 */
 	private int inventoryRows;
 	private static final String __OBFID = "CL_00000749";
-
-	public GuiComputer() {
+	DefaultVGACard card;
+	public GuiComputer(DefaultVGACard vga) {
 		super();
+		card = vga;
 	}
 
 	public void drawScreen(int par1, int par2, float par3) {
@@ -43,7 +47,9 @@ public class GuiComputer extends GuiScreen {
 	 * the items)
 	 */
 	protected void drawGuiForegroundLayer() {
-		this.fontRendererObj.drawString("Computer", 8, 6, 4210752);
+		//this.fontRendererObj.drawString("Computer", 8, 6, 4210752);
+		//Minecraft.getMinecraft().renderEngine.getTexture(par1ResourceLocation)
+		TextureUtil.uploadTextureImage(TextureUtil.glGenTextures(), card.buffer);
 	}
 
 	protected void drawGuiBackgroundLayer() {
