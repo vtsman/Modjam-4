@@ -20,45 +20,41 @@ import org.jpc.support.Clock;
 import org.jpc.support.DriveSet;
 import org.jpc.support.DriveSet.BootType;
 
-public class BlockComputer extends Block{
+public class BlockComputer extends Block {
 	public static PC pc = null;
 	public static JPC jpc = null;
+
 	public BlockComputer() {
 		super(Material.iron);
 		this.setHardness(1f);
 	}
-	
+
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister ir) {
 		this.blockIcon = ir.registerIcon("vmcraft:computer");
 	}
-	
+
 	@Override
-	public boolean onBlockActivated(World w, int x, int y, int z, EntityPlayer p, int meta, float hX, float hY, float hZ)
-    {
-		String[] args = new String[]{"-boot", "cdrom", "-cdrom", "/Users/Spencer/Documents/SLU.iso"};
-		
-		if(jpc == null){
-			JPC.initialise();
-			jpc = new JPC(true);
-			JPC.instance = jpc;
-			jpc.validate();
-	        jpc.setVisible(true);
+	public boolean onBlockActivated(World w, int x, int y, int z,
+			EntityPlayer p, int meta, float hX, float hY, float hZ) {
+		String[] args = new String[] { "-boot", "cdrom", "-cdrom",
+				"/Users/Spencer/Documents/SLU.iso" };
 
-	        if (args.length > 0) {
-	        	try {
-					pc = jpc.createPC(args);
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-	        }
+		if (pc == null) {
+			try {
+				pc = new PC(new VirtualClock(), args);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			new Thread(new PCThread(pc)).start();
 		}
-		
-		DefaultVGACard vga = (DefaultVGACard) pc.getComponent(DefaultVGACard.class);
-		System.out.println(vga);
-        return true;
-    }
 
-	
+		DefaultVGACard vga = (DefaultVGACard) pc
+				.getComponent(DefaultVGACard.class);
+		vga.resizeDisplay(360, 240);
+		System.out.println(vga);
+		return true;
+	}
+
 }
