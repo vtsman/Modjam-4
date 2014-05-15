@@ -2,6 +2,7 @@ package vtsman.vmcraft;
 
 import java.io.IOException;
 
+import org.jpc.debugger.JPC;
 import org.jpc.emulator.PC;
 import org.jpc.emulator.pci.peripheral.DefaultVGACard;
 import org.jpc.j2se.VirtualClock;
@@ -45,7 +46,11 @@ public class BlockComputer extends Block{
 		}
 		
 		pc.start();
+		pc.execute();
+		
+		JPC.getInstance().loadNewPC(pc);
 		}
+		
 		DefaultVGACard vga = (DefaultVGACard) pc.getComponent(DefaultVGACard.class);
 		System.out.println(vga);
         return true;
