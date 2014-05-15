@@ -152,7 +152,7 @@ public class KeyTable {
 		scancodeTable.put((KeyEvent.VK_SLASH),
 				Byte.valueOf((byte) 0x35));
 		scancodeTable.put((KeyEvent.VK_SHIFT),
-				Byte.valueOf((byte) 0x036));
+				Byte.valueOf((byte) 0x36));
 
 		// 37 KPad *
 
