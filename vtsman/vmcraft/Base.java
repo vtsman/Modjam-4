@@ -29,6 +29,7 @@ public class Base
     @EventHandler
     public void init(FMLInitializationEvent event)
     {
+    	KeyConv.init();
     	instance = this;
     	proxy.doStuff();
     	
