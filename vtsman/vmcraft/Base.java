@@ -7,6 +7,7 @@ import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.registry.GameRegistry;
+import cpw.mods.fml.common.registry.LanguageRegistry;
 
 @Mod(modid = Base.MODID, version = Base.VERSION)
 public class Base
@@ -21,9 +22,13 @@ public class Base
     public void init(FMLInitializationEvent event)
     {
 		tab = new TabComputer();
+		
+		LanguageRegistry.instance().addStringLocalization("itemGroup.VMCraft",
+				"en_US", "VMCraft");
     	
     	computer = new BlockComputer();
         GameRegistry.registerBlock(computer, "Computer");
+        computer.setCreativeTab(tab);
         
     }
 }
