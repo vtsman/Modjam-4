@@ -18,4 +18,5 @@ public class BlockComputer extends Block{
 		this.blockIcon = ir.registerIcon("VMCraft:computer");
 	}
 
+	
 }
