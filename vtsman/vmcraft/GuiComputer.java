@@ -53,7 +53,8 @@ public class GuiComputer extends GuiScreen {
 		int k = (this.width - xSize) / 2;
 		int l = (this.height - ySize) / 2;
 		TextureUtil.uploadTextureImage(TextureUtil.glGenTextures(), card.buffer);
-		this.drawTexturedModalRect(k - 4, l - 4, 0, 0, xSize + 4, ySize + 4);
+		//this.drawTexturedModalRect(k - 4, l - 4, 0, 0, xSize + 4, ySize + 4);
+		this.drawTexturedModalRect(0, 0, 0, 0, this.width, this.height);
 	}
 
 	protected void drawGuiBackgroundLayer() {
