@@ -61,6 +61,9 @@ public class BlockComputer extends Block {
 			// vga.setMonitor(mon);
 			// mon.setSize(100, 100);
 			// mon.setVisible(true);
+			if(w.isRemote){
+				p.openGui(Base.instance, GuiHandler.computerGuiID, w, x, y, z);
+			}
 		}
 
 		DefaultVGACard vga = (DefaultVGACard) pc
