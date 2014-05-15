@@ -57,7 +57,7 @@ public class GuiComputer extends GuiScreen {
 
 	@Override
 	public void keyTyped(char par1, int par2) {
-		byte kc = KeyMapping.getScancode(KeyStroke.getKeyStroke(par1, 0).getKeyCode());
+		byte kc = KeyTable.getScancode(Integer.valueOf(KeyStroke.getKeyStroke(par1, 0).getKeyCode()));
 		System.out.println(par1 + ":" + KeyStroke.getKeyStroke(par1, 0).getKeyCode() + ":" + kc);
 		kb.keyPressed(kc);
 		
