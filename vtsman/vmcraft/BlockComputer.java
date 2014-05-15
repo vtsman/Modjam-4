@@ -5,6 +5,8 @@ import java.io.IOException;
 import org.jpc.debugger.JPC;
 import org.jpc.emulator.PC;
 import org.jpc.emulator.pci.peripheral.DefaultVGACard;
+import org.jpc.j2se.PCMonitor;
+import org.jpc.j2se.PCMonitorFrame;
 import org.jpc.j2se.VirtualClock;
 
 import cpw.mods.fml.relauncher.Side;
@@ -40,14 +42,21 @@ public class BlockComputer extends Block {
 			EntityPlayer p, int meta, float hX, float hY, float hZ) {
 		String[] args = new String[] { "-boot", "cdrom", "-cdrom",
 				"/Users/Spencer/Documents/SLU.iso" };
-
+		
 		if (pc == null) {
 			try {
 				pc = new PC(new VirtualClock(), args);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-			new Thread(new PCThread(pc)).start();
+			PCMonitor mon = new PCMonitor(pc);
+			PCMonitorFrame frame = new PCMonitorFrame("hi", pc, args);
+			//new Thread(new PCThread(pc)).start();
+			//DefaultVGACard vga = (DefaultVGACard) pc
+			//		.getComponent(DefaultVGACard.class);
+			//vga.setMonitor(mon);
+			//mon.setSize(100, 100);
+			//mon.setVisible(true);
 		}
 
 		DefaultVGACard vga = (DefaultVGACard) pc
