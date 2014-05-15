@@ -22,6 +22,7 @@ import net.minecraft.util.ResourceLocation;
 import org.jpc.emulator.pci.peripheral.DefaultVGACard;
 import org.jpc.emulator.pci.peripheral.VGACard;
 import org.jpc.emulator.peripheral.Keyboard;
+import org.jpc.j2se.KeyMapping;
 import org.lwjgl.opengl.GL11;
 
 @SideOnly(Side.CLIENT)
@@ -56,8 +57,10 @@ public class GuiComputer extends GuiScreen {
 
 	@Override
 	public void keyTyped(char par1, int par2) {
-		int kc = KeyStroke.getKeyStroke('k', 0).getKeyCode();
-		kb.keyPressed((byte) kc);
+		byte kc = KeyMapping.getScancode(KeyStroke.getKeyStroke(par1, 0).getKeyCode());
+		System.out.println(par1 + ":" + KeyStroke.getKeyStroke(par1, 0).getKeyCode() + ":" + kc);
+		kb.keyPressed(kc);
+		
 		// BlockComputer.
 	}
 
