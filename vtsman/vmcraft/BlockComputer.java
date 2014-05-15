@@ -5,6 +5,7 @@ import java.io.IOException;
 import org.jpc.debugger.JPC;
 import org.jpc.emulator.PC;
 import org.jpc.emulator.pci.peripheral.DefaultVGACard;
+import org.jpc.emulator.peripheral.Keyboard;
 import org.jpc.j2se.PCMonitor;
 import org.jpc.j2se.PCMonitorFrame;
 import org.jpc.j2se.VirtualClock;
@@ -26,6 +27,7 @@ public class BlockComputer extends Block {
 	public static PC pc = null;
 	public static JPC jpc = null;
 	public static DefaultVGACard vga = null;
+	public static Keyboard kb = null;
 	public BlockComputer() {
 		super(Material.iron);
 		this.setHardness(1f);
@@ -62,6 +64,7 @@ public class BlockComputer extends Block {
 			// mon.setSize(100, 100);
 			// mon.setVisible(true);
 			vga = (DefaultVGACard) BlockComputer.pc.getComponent(DefaultVGACard.class);
+			kb = (Keyboard) BlockComputer.pc.getComponent(Keyboard.class);
 		}
 		p.openGui(Base.instance, GuiHandler.computerGuiID, w, x, y, z);
 		

@@ -1,5 +1,7 @@
 package vtsman.vmcraft;
 
+import javax.swing.KeyStroke;
+
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.Minecraft;
@@ -16,6 +18,7 @@ import net.minecraft.util.ResourceLocation;
 
 import org.jpc.emulator.pci.peripheral.DefaultVGACard;
 import org.jpc.emulator.pci.peripheral.VGACard;
+import org.jpc.emulator.peripheral.Keyboard;
 import org.lwjgl.opengl.GL11;
 
 @SideOnly(Side.CLIENT)
@@ -43,6 +46,12 @@ public class GuiComputer extends GuiScreen {
 		this.drawGuiForegroundLayer();
 	}
 
+	@Override
+	public void keyTyped(char par1, int par2){
+		int kc = KeyStroke.getKeyStroke('k', 0).getKeyCode();
+		
+	}
+	
 	/**
 	 * Draw the foreground layer for the GuiContainer (everything in front of
 	 * the items)
@@ -56,7 +65,6 @@ public class GuiComputer extends GuiScreen {
 		//this.drawTexturedModalRect(k - 4, l - 4, 0, 0, xSize + 4, ySize + 4);
 		this.drawTexturedModalRect(0, 0, 0, 0, this.width, this.height);
 	}
-
 	protected void drawGuiBackgroundLayer() {
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 		Minecraft.getMinecraft().getTextureManager()
