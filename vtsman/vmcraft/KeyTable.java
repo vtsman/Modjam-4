@@ -93,7 +93,7 @@ public class KeyTable {
 		scancodeTable.put((KeyEvent.VK_CLOSE_BRACKET),
 				Byte.valueOf((byte) 0x1b));
 
-		scancodeTable.put((KeyEvent.VK_ENTER),
+		scancodeTable.put((13),
 				Byte.valueOf((byte) 0x1c));
 
 		scancodeTable.put((KeyEvent.VK_CONTROL),
