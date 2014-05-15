@@ -3,6 +3,7 @@ package vtsman.vmcraft;
 import java.io.IOException;
 
 import org.jpc.emulator.PC;
+import org.jpc.emulator.pci.peripheral.DefaultVGACard;
 import org.jpc.j2se.VirtualClock;
 
 import cpw.mods.fml.relauncher.Side;
@@ -19,7 +20,7 @@ import org.jpc.support.DriveSet;
 import org.jpc.support.DriveSet.BootType;
 
 public class BlockComputer extends Block{
-
+	public static PC pc = null;
 	public BlockComputer() {
 		super(Material.iron);
 		this.setHardness(1f);
@@ -34,13 +35,19 @@ public class BlockComputer extends Block{
 	@Override
 	public boolean onBlockActivated(World w, int x, int y, int z, EntityPlayer p, int meta, float hX, float hY, float hZ)
     {
-		PC pc;
+		if(pc == null){
 		try {
 			DriveSet ds = DriveSet.buildFromArgs(new String[]{"-boot", "cdrom", "-cdrom", "/Users/Spencer/Documents/SLU.iso"});
-			pc = new PC(new VirtualClock(), new String[]{""});
+			pc = new PC(new VirtualClock(), ds);
 		} catch (IOException e) {
 			e.printStackTrace();
+			while(true);
 		}
+		
+		pc.start();
+		}
+		DefaultVGACard vga = (DefaultVGACard) pc.getComponent(DefaultVGACard.class);
+		System.out.println(vga);
         return true;
     }
 
