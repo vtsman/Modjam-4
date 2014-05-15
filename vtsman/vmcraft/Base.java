@@ -36,6 +36,7 @@ public class Base
     	computer = new BlockComputer();
         GameRegistry.registerBlock(computer, "Computer");
         computer.setCreativeTab(tab);
+        LanguageRegistry.addName(computer, "Computer");
         
     }
 }
