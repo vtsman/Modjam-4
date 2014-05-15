@@ -22,6 +22,7 @@ import org.jpc.support.DriveSet.BootType;
 
 public class BlockComputer extends Block{
 	public static PC pc = null;
+	public static JPC jpc = null;
 	public BlockComputer() {
 		super(Material.iron);
 		this.setHardness(1f);
@@ -36,19 +37,22 @@ public class BlockComputer extends Block{
 	@Override
 	public boolean onBlockActivated(World w, int x, int y, int z, EntityPlayer p, int meta, float hX, float hY, float hZ)
     {
-		if(pc == null){
-		try {
-			DriveSet ds = DriveSet.buildFromArgs(new String[]{"-boot", "cdrom", "-cdrom", "/Users/Spencer/Documents/SLU.iso"});
-			pc = new PC(new VirtualClock(), ds);
-		} catch (IOException e) {
-			e.printStackTrace();
-			while(true);
-		}
+		String[] args = new String[]{"-boot", "cdrom", "-cdrom", "/Users/Spencer/Documents/SLU.iso"};
 		
-		pc.start();
-		pc.execute();
-		
-		JPC.getInstance().loadNewPC(pc);
+		if(jpc == null){
+			JPC.initialise();
+			jpc = new JPC(true);
+			JPC.instance = jpc;
+			jpc.validate();
+	        jpc.setVisible(true);
+
+	        if (args.length > 0) {
+	        	try {
+					pc = jpc.createPC(args);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+	        }
 		}
 		
 		DefaultVGACard vga = (DefaultVGACard) pc.getComponent(DefaultVGACard.class);
