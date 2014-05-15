@@ -2,6 +2,9 @@ package vtsman.vmcraft;
 
 import javax.swing.KeyStroke;
 
+import cpw.mods.fml.client.FMLClientHandler;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import cpw.mods.fml.common.gameevent.InputEvent.KeyInputEvent;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.Minecraft;
@@ -35,10 +38,15 @@ public class GuiComputer extends GuiScreen {
 	 */
 	private int inventoryRows;
 	private static final String __OBFID = "CL_00000749";
+	
 	DefaultVGACard card;
-	public GuiComputer(DefaultVGACard vga) {
+	Keyboard kb;
+	
+	public GuiComputer(DefaultVGACard vga, Keyboard kb) {
 		super();
 		card = vga;
+		this.kb = kb;
+		// this.
 	}
 
 	public void drawScreen(int par1, int par2, float par3) {
@@ -47,24 +55,27 @@ public class GuiComputer extends GuiScreen {
 	}
 
 	@Override
-	public void keyTyped(char par1, int par2){
+	public void keyTyped(char par1, int par2) {
 		int kc = KeyStroke.getKeyStroke('k', 0).getKeyCode();
-		
+		kb.keyPressed((byte) kc);
+		// BlockComputer.
 	}
-	
+
 	/**
 	 * Draw the foreground layer for the GuiContainer (everything in front of
 	 * the items)
 	 */
 	protected void drawGuiForegroundLayer() {
-		//this.fontRendererObj.drawString("Computer", 8, 6, 4210752);
-		//Minecraft.getMinecraft().renderEngine.getTexture(par1ResourceLocation)
+		// this.fontRendererObj.drawString("Computer", 8, 6, 4210752);
+		// Minecraft.getMinecraft().renderEngine.getTexture(par1ResourceLocation)
 		int k = (this.width - xSize) / 2;
 		int l = (this.height - ySize) / 2;
-		TextureUtil.uploadTextureImage(TextureUtil.glGenTextures(), card.buffer);
-		//this.drawTexturedModalRect(k - 4, l - 4, 0, 0, xSize + 4, ySize + 4);
+		TextureUtil
+				.uploadTextureImage(TextureUtil.glGenTextures(), card.buffer);
+		// this.drawTexturedModalRect(k - 4, l - 4, 0, 0, xSize + 4, ySize + 4);
 		this.drawTexturedModalRect(0, 0, 0, 0, this.width, this.height);
 	}
+
 	protected void drawGuiBackgroundLayer() {
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 		Minecraft.getMinecraft().getTextureManager()
@@ -75,17 +86,28 @@ public class GuiComputer extends GuiScreen {
 		// this.drawGradientRect(0, 0, this.width, this.height, -1072689136,
 		// -804253680);
 	}
-	
-	 public void drawTexturedRect(int par1, int par2, int par3, int par4, int par5, int par6)
-	    {
-	        float f = 0.00390625F;
-	        float f1 = 0.00390625F;
-	        Tessellator tessellator = Tessellator.instance;
-	        tessellator.startDrawingQuads();
-	        tessellator.addVertexWithUV((double)(par1 + 0), (double)(par2 + par6), (double)this.zLevel, (double)((float)(par3 + 0) * f), (double)((float)(par4 + par6) * f1));
-	        tessellator.addVertexWithUV((double)(par1 + par5), (double)(par2 + par6), (double)this.zLevel, (double)((float)(par3 + par5) * f), (double)((float)(par4 + par6) * f1));
-	        tessellator.addVertexWithUV((double)(par1 + par5), (double)(par2 + 0), (double)this.zLevel, (double)((float)(par3 + par5) * f), (double)((float)(par4 + 0) * f1));
-	        tessellator.addVertexWithUV((double)(par1 + 0), (double)(par2 + 0), (double)this.zLevel, (double)((float)(par3 + 0) * f), (double)((float)(par4 + 0) * f1));
-	        tessellator.draw();
-	    }
+
+	public void drawTexturedRect(int par1, int par2, int par3, int par4,
+			int par5, int par6) {
+		float f = 0.00390625F;
+		float f1 = 0.00390625F;
+		Tessellator tessellator = Tessellator.instance;
+		tessellator.startDrawingQuads();
+		tessellator.addVertexWithUV((double) (par1 + 0),
+				(double) (par2 + par6), (double) this.zLevel,
+				(double) ((float) (par3 + 0) * f),
+				(double) ((float) (par4 + par6) * f1));
+		tessellator.addVertexWithUV((double) (par1 + par5),
+				(double) (par2 + par6), (double) this.zLevel,
+				(double) ((float) (par3 + par5) * f),
+				(double) ((float) (par4 + par6) * f1));
+		tessellator.addVertexWithUV((double) (par1 + par5),
+				(double) (par2 + 0), (double) this.zLevel,
+				(double) ((float) (par3 + par5) * f),
+				(double) ((float) (par4 + 0) * f1));
+		tessellator.addVertexWithUV((double) (par1 + 0), (double) (par2 + 0),
+				(double) this.zLevel, (double) ((float) (par3 + 0) * f),
+				(double) ((float) (par4 + 0) * f1));
+		tessellator.draw();
+	}
 }
