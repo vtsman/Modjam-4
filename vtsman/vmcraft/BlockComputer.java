@@ -42,7 +42,7 @@ public class BlockComputer extends Block {
 			EntityPlayer p, int meta, float hX, float hY, float hZ) {
 		String[] args = new String[] { "-boot", "cdrom", "-cdrom",
 				"/Users/Spencer/Documents/SLU.iso" };
-		
+
 		if (pc == null) {
 			try {
 				pc = new PC(new VirtualClock(), args);
@@ -51,12 +51,16 @@ public class BlockComputer extends Block {
 			}
 			PCMonitor mon = new PCMonitor(pc);
 			PCMonitorFrame frame = new PCMonitorFrame("hi", pc, args);
-			//new Thread(new PCThread(pc)).start();
-			//DefaultVGACard vga = (DefaultVGACard) pc
-			//		.getComponent(DefaultVGACard.class);
-			//vga.setMonitor(mon);
-			//mon.setSize(100, 100);
-			//mon.setVisible(true);
+			frame.validate();
+			frame.setVisible(true);
+			frame.setBounds(100, 100, 760, 500);
+			frame.start();
+			// new Thread(new PCThread(pc)).start();
+			// DefaultVGACard vga = (DefaultVGACard) pc
+			// .getComponent(DefaultVGACard.class);
+			// vga.setMonitor(mon);
+			// mon.setSize(100, 100);
+			// mon.setVisible(true);
 		}
 
 		DefaultVGACard vga = (DefaultVGACard) pc
