@@ -4,6 +4,8 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
+import net.minecraft.client.gui.GuiButton;
+import net.minecraft.client.gui.GuiLabel;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.inventory.ContainerChest;
@@ -26,19 +28,29 @@ public class GuiComputer extends GuiScreen
     {
         super();
     }
+    
+    public void drawScreen(int par1, int par2, float par3)
+    {
+    	this.drawGuiBackgroundLayer();
+        this.drawGuiForegroundLayer();
+    }
 
     /**
      * Draw the foreground layer for the GuiContainer (everything in front of the items)
      */
-    protected void drawGuiContainerForegroundLayer(int p_146979_1_, int p_146979_2_)
+    protected void drawGuiForegroundLayer()
     {
        this.fontRendererObj.drawString("Computer", 8, 6, 4210752);
     }
-
-    protected void drawGuiContainerBackgroundLayer(float p_146976_1_, int p_146976_2_, int p_146976_3_)
+    
+    protected void drawGuiBackgroundLayer()
     {
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         Minecraft.getMinecraft().getTextureManager().bindTexture(field_147017_u);
-        //this.drawTexturedModalRect(k, l + this.inventoryRows * 18 + 17, 0, 126, , 96);
+        int k = (this.width) / 2;
+        int l = (this.height) / 2;
+        this.drawTexturedModalRect(0, 0, 0, 0, 100, 100);
+        System.out.println("here");
+        //this.drawGradientRect(0, 0, this.width, this.height, -1072689136, -804253680);
     }
 }
