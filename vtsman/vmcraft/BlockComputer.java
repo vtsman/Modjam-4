@@ -31,6 +31,7 @@ public class BlockComputer extends Block {
 	public BlockComputer() {
 		super(Material.iron);
 		this.setHardness(1f);
+		this.setBlockName("VMCraftComputer");
 	}
 
 	@Override
