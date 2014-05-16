@@ -22,7 +22,7 @@ public class GuiHandler implements IGuiHandler{
 			int x, int y, int z) {
 		switch(ID){
 			case computerGuiID: return new GuiComputer(BlockComputer.vga, BlockComputer.kb, player);
-			case selectGuiID: return new GuiDrive(player.getHeldItem());
+			case selectGuiID: return new GuiDrive(player.getHeldItem(), player);
 			default: return null;
 		}
 	}

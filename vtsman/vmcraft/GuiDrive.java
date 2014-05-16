@@ -8,46 +8,53 @@ import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiOptionButton;
 import net.minecraft.client.gui.GuiOptionSlider;
 import net.minecraft.client.gui.GuiScreen;
+import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.settings.GameSettings;
 import net.minecraft.client.settings.KeyBinding;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.ResourceLocation;
 
 @SideOnly(Side.CLIENT)
 public class GuiDrive extends GuiScreen {
-	private static final GameSettings.Options[] field_146492_g = new GameSettings.Options[] {
-			GameSettings.Options.INVERT_MOUSE,
-			GameSettings.Options.SENSITIVITY, GameSettings.Options.TOUCHSCREEN };
-	/**
-	 * A reference to the screen object that created this. Used for navigating
-	 * between screens.
-	 */
-	protected String field_146495_a = "Controls";
-	/** Reference to the GameSettings object. */
-	/** The ID of the button that has been pressed. */
-	public KeyBinding buttonId = null;
+	protected float scale = 1.4f;
+	protected int xSize = 176;
+	protected int ySize = 166;
+
+	private static final ResourceLocation field_147017_u = new ResourceLocation(
+			"vmcraft", "textures/gui/computerGui.png");
+
 	private FileList keyBindingList;
 	private GuiButton field_146493_s;
-	private static final String __OBFID = "CL_00000736";
 	int m;
 	ItemStack st;
-	public GuiDrive(ItemStack s, Player p) {
+	EntityPlayer p;
+
+	public GuiDrive(ItemStack s, EntityPlayer p) {
 		m = s.getItemDamage();
 		st = s;
+		this.p = p;
 	}
 
 	/**
 	 * Adds the buttons (and other controls) to the screen in question.
 	 */
-	
+
 	public static String writePath;
-	
+
 	public void initGui() {
-		switch(m){
-		case 0: this.keyBindingList = new FileList(this, "iso", Base.cdDir); break;
-		case 1: this.keyBindingList = new FileList(this, "img", Base.floppyDir); break;
-		case 2: this.keyBindingList = new FileList(this, "img", Base.hddDir); break;
+		switch (m) {
+		case 0:
+			this.keyBindingList = new FileList(this, "iso", Base.cdDir);
+			break;
+		case 1:
+			this.keyBindingList = new FileList(this, "img", Base.floppyDir);
+			break;
+		case 2:
+			this.keyBindingList = new FileList(this, "img", Base.hddDir);
+			break;
 		}
 		this.buttonList.add(new GuiButton(200, this.width / 2 - 155,
 				this.height - 29, 155 * 2, 20, "Select image"));
@@ -55,11 +62,12 @@ public class GuiDrive extends GuiScreen {
 
 	protected void actionPerformed(GuiButton p_146284_1_) {
 		super.actionPerformed(p_146284_1_);
-		if(writePath != null){
-			if(new File(writePath).exists()){
-				if(st.stackTagCompound == null)
+		if (writePath != null) {
+			if (new File(writePath).exists()) {
+				if (st.stackTagCompound == null)
 					st.stackTagCompound = new NBTTagCompound();
 				st.stackTagCompound.setString("path", writePath);
+				p.closeScreen();
 			}
 		}
 	}
@@ -90,23 +98,42 @@ public class GuiDrive extends GuiScreen {
 	 * KeyListener.keyTyped(KeyEvent e).
 	 */
 	protected void keyTyped(char par1, int par2) {
-		if (this.buttonId != null) {
-			this.buttonId = null;
-			KeyBinding.resetKeyBindingArrayAndHash();
-		} else {
-			super.keyTyped(par1, par2);
-		}
+		super.keyTyped(par1, par2);
 	}
+
 	public String top = "Please select a disk image";
+
 	/**
 	 * Draws the screen and all the components in it.
 	 */
 	public void drawScreen(int par1, int par2, float par3) {
-		this.drawDefaultBackground();
+		int k = (this.width - (int) (xSize * scale)) / 2;
+		int l = (this.height - (int) (ySize * scale)) / 2;
+		this.drawTexturedRect(k, l, (int) (xSize * scale),
+				(int) (ySize * scale));
 		this.keyBindingList.drawScreen(par1, par2, par3);
-		this.drawCenteredString(this.fontRendererObj, top,
-				this.width / 2, 8, 16777215);
+		this.drawCenteredString(this.fontRendererObj, top, this.width / 2, 8,
+				16777215);
 
 		super.drawScreen(par1, par2, par3);
+	}
+
+	public void drawTexturedRect(int par1, int par2, int par5, int par6) {
+		float f = 0.00390625F;
+		float f1 = 0.00390625F;
+		Tessellator tessellator = Tessellator.instance;
+		tessellator.startDrawingQuads();
+		tessellator.addVertexWithUV((double) (par1 + 0),
+				(double) (par2 + par6), (double) this.zLevel, (double) (0),
+				(double) (1));
+		tessellator.addVertexWithUV((double) (par1 + par5),
+				(double) (par2 + par6), (double) this.zLevel, (double) (1),
+				(double) (1));
+		tessellator.addVertexWithUV((double) (par1 + par5),
+				(double) (par2 + 0), (double) this.zLevel, (double) (1),
+				(double) (0));
+		tessellator.addVertexWithUV((double) (par1 + 0), (double) (par2 + 0),
+				(double) this.zLevel, (double) (0), (double) (0));
+		tessellator.draw();
 	}
 }
