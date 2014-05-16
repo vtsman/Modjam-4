@@ -8,8 +8,10 @@ import net.minecraft.client.renderer.Tessellator;
 
 public class FileEntry implements IGuiListEntry{
 	String n;
+	public File file;
 	public FileEntry(File f){
 		n = f.getName();
+		file = f;
 	}
 
 	@Override

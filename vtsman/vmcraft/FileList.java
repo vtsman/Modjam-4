@@ -13,10 +13,10 @@ import net.minecraft.client.gui.GuiScreen;
 
 public class FileList extends GuiListExtended{
 
-	private final GuiScreen parent;
-	private final List<IGuiListEntry> entries = Lists.newArrayList();
+	private final GuiDrive parent;
+	private final List<FileEntry> entries = Lists.newArrayList();
 
-	public FileList(GuiScreen parent, String fExt, File dir) {
+	public FileList(GuiDrive parent, String fExt, File dir) {
 		super(Minecraft.getMinecraft(), parent.width, parent.height, 33, parent.height - 32, 20);
 		this.parent = parent;
 		setShowSelectionBox(false);
@@ -29,14 +29,7 @@ public class FileList extends GuiListExtended{
 				}
 			}
 		}
-
 	}
-
-	public void addEntries(IGuiListEntry... entries) {
-		this.entries.addAll(Arrays.asList(entries));
-	}
-
-
 
 	@Override public IGuiListEntry getListEntry(int index) {
 		return entries.get(index);
@@ -55,8 +48,9 @@ public class FileList extends GuiListExtended{
 	}
 	public int selected = -1;
 	protected void elementClicked(int p_148144_1_, boolean p_148144_2_, int p_148144_3_, int p_148144_4_) {
-		System.out.println(p_148144_1_);
 		selected = p_148144_1_;
+		parent.top = "You have selected " + entries.get(p_148144_1_).file.getName();
+		parent.writePath = entries.get(p_148144_1_).file.getAbsolutePath();
 	}
 
     /**
@@ -64,10 +58,9 @@ public class FileList extends GuiListExtended{
      */
     protected boolean isSelected(int p_148131_1_)
     {
-    	System.out.println(p_148131_1_);
         return p_148131_1_ == selected;
     }
 
-    protected void drawBackground() {}
+    //protected void drawBackground() {}
 
 }

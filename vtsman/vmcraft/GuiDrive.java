@@ -1,5 +1,7 @@
 package vtsman.vmcraft;
 
+import java.io.File;
+
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.gui.GuiButton;
@@ -9,6 +11,8 @@ import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.settings.GameSettings;
 import net.minecraft.client.settings.KeyBinding;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 
 @SideOnly(Side.CLIENT)
 public class GuiDrive extends GuiScreen {
@@ -27,14 +31,18 @@ public class GuiDrive extends GuiScreen {
 	private GuiButton field_146493_s;
 	private static final String __OBFID = "CL_00000736";
 	int m;
-
-	public GuiDrive(int meta) {
-		m = meta;
+	ItemStack st;
+	public GuiDrive(ItemStack s, Player p) {
+		m = s.getItemDamage();
+		st = s;
 	}
 
 	/**
 	 * Adds the buttons (and other controls) to the screen in question.
 	 */
+	
+	public static String writePath;
+	
 	public void initGui() {
 		switch(m){
 		case 0: this.keyBindingList = new FileList(this, "iso", Base.cdDir); break;
@@ -42,33 +50,17 @@ public class GuiDrive extends GuiScreen {
 		case 2: this.keyBindingList = new FileList(this, "img", Base.hddDir); break;
 		}
 		this.buttonList.add(new GuiButton(200, this.width / 2 - 155,
-				this.height - 29, 150, 20, I18n.format("gui.done",
-						new Object[0])));
-		this.buttonList.add(this.field_146493_s = new GuiButton(201,
-				this.width / 2 - 155 + 160, this.height - 29, 150, 20, I18n
-						.format("controls.resetAll", new Object[0])));
-		this.field_146495_a = I18n.format("controls.title", new Object[0]);
-		int i = 0;
-		GameSettings.Options[] aoptions = field_146492_g;
-		int j = aoptions.length;
+				this.height - 29, 155 * 2, 20, "Select image"));
 	}
 
 	protected void actionPerformed(GuiButton p_146284_1_) {
-		if (p_146284_1_.id == 200) {
-
-		} else if (p_146284_1_.id == 201) {
-			KeyBinding[] akeybinding = this.mc.gameSettings.keyBindings;
-			int i = akeybinding.length;
-
-			for (int j = 0; j < i; ++j) {
-				KeyBinding keybinding = akeybinding[j];
-				keybinding.setKeyCode(keybinding.getKeyCodeDefault());
+		super.actionPerformed(p_146284_1_);
+		if(writePath != null){
+			if(new File(writePath).exists()){
+				if(st.stackTagCompound == null)
+					st.stackTagCompound = new NBTTagCompound();
+				st.stackTagCompound.setString("path", writePath);
 			}
-
-			KeyBinding.resetKeyBindingArrayAndHash();
-		} else if (p_146284_1_.id < 100
-				&& p_146284_1_ instanceof GuiOptionButton) {
-
 		}
 	}
 
@@ -76,13 +68,7 @@ public class GuiDrive extends GuiScreen {
 	 * Called when the mouse is clicked.
 	 */
 	protected void mouseClicked(int par1, int par2, int par3) {
-		if (this.buttonId != null) {
-			this.buttonId = null;
-			KeyBinding.resetKeyBindingArrayAndHash();
-		} else if (par3 != 0
-				|| !this.keyBindingList.func_148179_a(par1, par2, par3)) {
-			super.mouseClicked(par1, par2, par3);
-		}
+		super.mouseClicked(par1, par2, par3);
 	}
 
 	/**
@@ -111,16 +97,15 @@ public class GuiDrive extends GuiScreen {
 			super.keyTyped(par1, par2);
 		}
 	}
-
+	public String top = "Please select a disk image";
 	/**
 	 * Draws the screen and all the components in it.
 	 */
 	public void drawScreen(int par1, int par2, float par3) {
 		this.drawDefaultBackground();
 		this.keyBindingList.drawScreen(par1, par2, par3);
-		this.drawCenteredString(this.fontRendererObj, this.field_146495_a,
+		this.drawCenteredString(this.fontRendererObj, top,
 				this.width / 2, 8, 16777215);
-		boolean flag = true;
 
 		super.drawScreen(par1, par2, par3);
 	}
