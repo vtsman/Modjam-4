@@ -1,5 +1,7 @@
 package vtsman.vmcraft;
 
+import java.io.File;
+
 import vtsman.vmcraft.proxy.Common;
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
@@ -8,6 +10,7 @@ import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
+import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
@@ -26,6 +29,14 @@ public class Base
     public static Base instance;
     
     public static Block computer;
+    public static File config;
+    @Mod.EventHandler
+	public void preInit(FMLPreInitializationEvent evt) {
+		config = evt.getSuggestedConfigurationFile();
+		System.out.println(config.getParent());
+	}
+
+    
     @EventHandler
     public void init(FMLInitializationEvent event)
     {
