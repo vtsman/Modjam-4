@@ -4,6 +4,7 @@ import java.io.File;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiOptionButton;
 import net.minecraft.client.gui.GuiOptionSlider;
@@ -109,6 +110,8 @@ public class GuiDrive extends GuiScreen {
 	public void drawScreen(int par1, int par2, float par3) {
 		int k = (this.width - (int) (xSize * scale)) / 2;
 		int l = (this.height - (int) (ySize * scale)) / 2;
+		Minecraft.getMinecraft().getTextureManager()
+		.bindTexture(field_147017_u);
 		this.drawTexturedRect(k, l, (int) (xSize * scale),
 				(int) (ySize * scale));
 		this.keyBindingList.drawScreen(par1, par2, par3);

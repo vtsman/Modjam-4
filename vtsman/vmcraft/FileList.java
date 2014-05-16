@@ -4,12 +4,16 @@ import java.io.File;
 import java.util.Arrays;
 import java.util.List;
 
+import org.lwjgl.opengl.GL11;
+
 import com.google.common.collect.Lists;
 import com.google.common.io.Files;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.GuiListExtended;
 import net.minecraft.client.gui.GuiScreen;
+import net.minecraft.client.renderer.Tessellator;
 
 public class FileList extends GuiListExtended{
 
@@ -60,7 +64,13 @@ public class FileList extends GuiListExtended{
     {
         return p_148131_1_ == selected;
     }
-
-    //protected void drawBackground() {}
+    @Override
+    protected void drawBackground() {}
+    
+    @Override
+    protected void drawContainerBackground(Tessellator tessellator)
+    {
+       
+    }
 
 }
