@@ -53,5 +53,21 @@ public class FileList extends GuiListExtended{
 	@Override public int getListWidth() {
 		return parent.width;
 	}
+	public int selected = -1;
+	protected void elementClicked(int p_148144_1_, boolean p_148144_2_, int p_148144_3_, int p_148144_4_) {
+		System.out.println(p_148144_1_);
+		selected = p_148144_1_;
+	}
+
+    /**
+     * Returns true if the element passed in is currently selected
+     */
+    protected boolean isSelected(int p_148131_1_)
+    {
+    	System.out.println(p_148131_1_);
+        return p_148131_1_ == selected;
+    }
+
+    protected void drawBackground() {}
 
 }
