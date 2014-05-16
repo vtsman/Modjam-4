@@ -1,5 +1,5 @@
 package vtsman.vmcraft;
 
-public class ItemFloppy {
+public class ItemDrive {
 
 }

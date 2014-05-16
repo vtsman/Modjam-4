@@ -29,12 +29,31 @@ public class Base
     public static Base instance;
     
     public static Block computer;
+    
     public static File config;
+    public static File minecraftFolder;
+    
+    public static File floppyDir;
+    public static File cdDir;
+    public static File hddDir;
+    
     @Mod.EventHandler
 	public void preInit(FMLPreInitializationEvent evt) {
 		config = evt.getSuggestedConfigurationFile();
-		System.out.println(config.getParent());
+		minecraftFolder = config.getParentFile().getParentFile();
+		floppyDir = new File(minecraftFolder, "VMCraft Floppies");
+		cdDir = new File(minecraftFolder, "VMCraft CDs");
+		hddDir = new File(minecraftFolder, "VMCraft Hard Drives");
+		
+		mkDir(floppyDir);
+		mkDir(cdDir);
+		mkDir(hddDir);
 	}
+    
+    private static void mkDir(File f){
+    	if(!f.exists())
+    		f.mkdir();
+    }
 
     
     @EventHandler
