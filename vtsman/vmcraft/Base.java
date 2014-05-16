@@ -75,9 +75,9 @@ public class Base
 		
 		drive = new ItemDrive();
 		GameRegistry.registerItem(drive, "VMItemDrive");
-		//LanguageRegistry.addName("item.item.VMItemDrive0.name", "CD");
-		LanguageRegistry.addName("item.item.VMItemDrive1", "Floppy Disk");
-		LanguageRegistry.addName("item.VMItemDrive2.name", "Hard Drive");
+		LanguageRegistry.addName(new ItemStack(drive, 1, 0), "CD");
+		LanguageRegistry.addName(new ItemStack(drive, 1, 1), "Floppy Disk");
+		LanguageRegistry.addName(new ItemStack(drive, 1, 2), "Hard Drive");
 		drive.setCreativeTab(tab);
 		
 		

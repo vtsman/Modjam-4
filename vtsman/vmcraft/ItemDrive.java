@@ -39,7 +39,7 @@ public class ItemDrive extends Item {
 	
 	public String getUnlocalizedName(ItemStack par1ItemStack)
     {
-        return "item." + this.getUnlocalizedName() + par1ItemStack.getItemDamage();
+        return this.getUnlocalizedName() + par1ItemStack.getItemDamage();
     }
 	
 	@SideOnly(Side.CLIENT)
