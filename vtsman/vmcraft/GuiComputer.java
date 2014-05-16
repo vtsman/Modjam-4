@@ -57,22 +57,25 @@ public class GuiComputer extends GuiScreen {
 
 	@Override
 	public void keyTyped(char par1, int par2) {
+		
+		if(this.isShiftKeyDown()){
+			kb.keyPressed((byte) 0x36);
+		}
+		else{
+			kb.keyReleased((byte) 0x36);
+		}
+		if(this.isCtrlKeyDown()){
+			kb.keyPressed((byte) 0x1e);
+		}
+		else{
+			kb.keyReleased((byte) 0x1e);
+		}
 		if('a' <= par1 && 'z' >= par1){
 			par1 += 'A' - 'a';
 		}
 		byte kc = KeyTable.getScancode(Integer.valueOf(KeyStroke.getKeyStroke(par1, 0).getKeyCode()));
 		System.out.println(par1 + ":" + KeyStroke.getKeyStroke(par1, 0).getKeyCode() + ":" + kc);
 		kb.keyPressed(kc);
-		
-		if(this.isShiftKeyDown()){
-			kb.keyPressed((byte) 0x36);
-			while(!kb.updated());
-			kb.keyReleased((byte) 0x36);
-		}
-		if(this.isCtrlKeyDown()){
-			kb.keyPressed((byte) 0x2a);
-		}
-		// BlockComputer.
 	}
 
 	/**
