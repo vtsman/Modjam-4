@@ -8,6 +8,7 @@ import cpw.mods.fml.common.network.IGuiHandler;
 
 public class GuiHandler implements IGuiHandler{
 	public static final int computerGuiID = 314;
+	public static final int selectGuiID = 315;
 	@Override
 	public Object getServerGuiElement(int ID, EntityPlayer player, World world,
 			int x, int y, int z) {
@@ -21,6 +22,7 @@ public class GuiHandler implements IGuiHandler{
 			int x, int y, int z) {
 		switch(ID){
 			case computerGuiID: return new GuiComputer(BlockComputer.vga, BlockComputer.kb, player);
+			case selectGuiID: return new GuiDrive(player.getHeldItem().getItemDamage());
 			default: return null;
 		}
 	}
