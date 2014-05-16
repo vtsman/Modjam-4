@@ -30,8 +30,8 @@ import org.lwjgl.opengl.GL11;
 @SideOnly(Side.CLIENT)
 public class GuiComputer extends GuiScreen {
 
-	protected int xSize = 176;
-	protected int ySize = 249;
+	protected int xSize = 211;
+	protected int ySize = 200;
 
 	private static final ResourceLocation field_147017_u = new ResourceLocation(
 			"vmcraft", "textures/gui/computerGui.png");
@@ -158,10 +158,6 @@ public class GuiComputer extends GuiScreen {
 		int l = (this.height - ySize) / 2;
 		TextureUtil
 				.uploadTextureImage(TextureUtil.glGenTextures(), card.buffer);
-		// this.drawTexturedModalRect(k - 4, l - 4, 0, 0, xSize + 4, ySize + 4);
-		System.out.println(card.buffer.getWidth());
-		//this.drawTexturedRect(0, 0, 0, 0, this.width, this.height,
-		//		card.buffer.getWidth() / 2, card.buffer.getHeight() / 2);
 		this.drawTexturedRect(k + 4, l + 4, xSize - 8, ySize - 8);
 	}
 
