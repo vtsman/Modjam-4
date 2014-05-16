@@ -1,9 +1,11 @@
 package vtsman.vmcraft;
 
+import java.io.File;
 import java.util.Arrays;
 import java.util.List;
 
 import com.google.common.collect.Lists;
+import com.google.common.io.Files;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiListExtended;
@@ -14,10 +16,19 @@ public class FileList extends GuiListExtended{
 	private final GuiScreen parent;
 	private final List<IGuiListEntry> entries = Lists.newArrayList();
 
-	public FileList(GuiScreen parent) {
+	public FileList(GuiScreen parent, String fExt, File dir) {
 		super(Minecraft.getMinecraft(), parent.width, parent.height, 33, parent.height - 32, 20);
 		this.parent = parent;
 		setShowSelectionBox(false);
+		if(dir.listFiles().length == 0)
+			return;
+		for(File f : dir.listFiles()){
+			if(f.isFile()){
+				if(Files.getFileExtension(f.getName()).equals(fExt)){
+					entries.add(new FileEntry(f));
+				}
+			}
+		}
 
 	}
 

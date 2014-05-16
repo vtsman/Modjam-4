@@ -23,7 +23,7 @@ public class GuiDrive extends GuiScreen {
 	/** Reference to the GameSettings object. */
 	/** The ID of the button that has been pressed. */
 	public KeyBinding buttonId = null;
-	private GuiKeyBindingList keyBindingList;
+	private FileList keyBindingList;
 	private GuiButton field_146493_s;
 	private static final String __OBFID = "CL_00000736";
 	int m;
@@ -36,7 +36,11 @@ public class GuiDrive extends GuiScreen {
 	 * Adds the buttons (and other controls) to the screen in question.
 	 */
 	public void initGui() {
-		this.keyBindingList = new GuiKeyBindingList(this, this.mc);
+		switch(m){
+		case 0: this.keyBindingList = new FileList(this, "iso", Base.cdDir); break;
+		case 1: this.keyBindingList = new FileList(this, "img", Base.floppyDir); break;
+		case 2: this.keyBindingList = new FileList(this, "img", Base.hddDir); break;
+		}
 		this.buttonList.add(new GuiButton(200, this.width / 2 - 155,
 				this.height - 29, 150, 20, I18n.format("gui.done",
 						new Object[0])));
@@ -47,23 +51,6 @@ public class GuiDrive extends GuiScreen {
 		int i = 0;
 		GameSettings.Options[] aoptions = field_146492_g;
 		int j = aoptions.length;
-
-		for (int k = 0; k < j; ++k) {
-			GameSettings.Options options = aoptions[k];
-
-			if (options.getEnumFloat()) {
-				this.buttonList.add(new GuiOptionSlider(options
-						.returnEnumOrdinal(), this.width / 2 - 155 + i % 2
-						* 160, 18 + 24 * (i >> 1), options));
-			} else {
-				this.buttonList.add(new GuiOptionButton(options
-						.returnEnumOrdinal(), this.width / 2 - 155 + i % 2
-						* 160, 18 + 24 * (i >> 1), options, this.options
-						.getKeyBinding(options)));
-			}
-
-			++i;
-		}
 	}
 
 	protected void actionPerformed(GuiButton p_146284_1_) {
