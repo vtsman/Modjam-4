@@ -29,7 +29,7 @@ import org.lwjgl.opengl.GL11;
 
 @SideOnly(Side.CLIENT)
 public class GuiComputer extends GuiScreen {
-	protected float scale = 1.3f;
+	protected float scale = 1.4f;
 	protected int xSize = 176;
 	protected int ySize = 166;
 
@@ -134,8 +134,6 @@ public class GuiComputer extends GuiScreen {
 
 		byte kc = KeyTable.getScancode(Integer.valueOf(KeyStroke.getKeyStroke(
 				par1, 0).getKeyCode()));
-		System.out.println(par1 + ":"
-				+ KeyStroke.getKeyStroke(par1, 0).getKeyCode() + ":" + kc);
 		if(kc == 0x36 || kc == 0x1e || kc == 0)
 			return;
 		kb.keyPressed(kc);
