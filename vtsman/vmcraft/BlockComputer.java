@@ -24,7 +24,7 @@ import org.jpc.support.DriveSet;
 import org.jpc.support.DriveSet.BootType;
 
 public class BlockComputer extends Block {
-	public static PC pc = null;
+	public static PC pc = null; 
 	public static JPC jpc = null;
 	public static DefaultVGACard vga = null;
 	public static Keyboard kb = null;
