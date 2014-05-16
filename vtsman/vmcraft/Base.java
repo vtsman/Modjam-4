@@ -74,10 +74,7 @@ public class Base
 				"en_US", "VMCraft");
 		
 		drive = new ItemDrive();
-		GameRegistry.registerItem(drive, drive.getUnlocalizedName());
-		LanguageRegistry.addName(new ItemStack(drive, 1, 0), "CD");
-		LanguageRegistry.addName(new ItemStack(drive, 1, 1), "Floppy Disk");
-		LanguageRegistry.addName(new ItemStack(drive, 1, 2), "Hard Drive");
+		GameRegistry.registerItem(drive, "Drive");
 		drive.setCreativeTab(tab);
 		
 		
@@ -85,7 +82,6 @@ public class Base
     	computer = new BlockComputer();
         GameRegistry.registerBlock(computer, "Computer");
         computer.setCreativeTab(tab);
-        LanguageRegistry.addName(computer, "Computer");
         
     }
 }
