@@ -23,6 +23,7 @@ import org.jpc.emulator.pci.peripheral.DefaultVGACard;
 import org.jpc.emulator.pci.peripheral.VGACard;
 import org.jpc.emulator.peripheral.Keyboard;
 import org.jpc.j2se.KeyMapping;
+import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.GL11;
 
 @SideOnly(Side.CLIENT)
@@ -100,7 +101,16 @@ public class GuiComputer extends GuiScreen {
 		byte kc = KeyTable.getScancode(Integer.valueOf(KeyStroke.getKeyStroke(par1, 0).getKeyCode()));
 		System.out.println(par1 + ":" + KeyStroke.getKeyStroke(par1, 0).getKeyCode() + ":" + kc);
 		kb.keyPressed(kc);
+		
+		if (updateMHz(markTime, totalExec)) 
+        {
+            markTime = System.currentTimeMillis();
+            totalExec = 0;
+        }
 	}
+	
+	long markTime = System.currentTimeMillis();
+	int totalExec = 0;
 
 	/**
 	 * Draw the foreground layer for the GuiContainer (everything in front of
@@ -151,4 +161,22 @@ public class GuiComputer extends GuiScreen {
 				(double) ((float) (par4 + 0) * f1));
 		tessellator.draw();
 	}
+	
+	private static final int COUNTDOWN = 10000000;
+	
+	private boolean updateMHz(long time, long count)
+    {
+        long t2 = System.currentTimeMillis();
+        if (t2 - time < 100)
+            return false;
+        
+        count = COUNTDOWN - count;
+        float mhz = count * 1000.0F / (t2 - time) / 1000000;
+
+        float clockSpeed = 17.25F / 770 * mhz / 7.5F * 2.790F;
+        
+        //int percent = (int) (clockSpeed / 3000 * 1000 * 100 * 10);
+        Display.setTitle("Minecraft - VM running at " + mhz + " MHz");
+        return true;
+    }
 }
