@@ -29,9 +29,9 @@ import org.lwjgl.opengl.GL11;
 
 @SideOnly(Side.CLIENT)
 public class GuiComputer extends GuiScreen {
-
-	protected int xSize = 211;
-	protected int ySize = 200;
+	protected float scale = 1.3f;
+	protected int xSize = 176;
+	protected int ySize = 166;
 
 	private static final ResourceLocation field_147017_u = new ResourceLocation(
 			"vmcraft", "textures/gui/computerGui.png");
@@ -136,12 +136,10 @@ public class GuiComputer extends GuiScreen {
 				par1, 0).getKeyCode()));
 		System.out.println(par1 + ":"
 				+ KeyStroke.getKeyStroke(par1, 0).getKeyCode() + ":" + kc);
+		if(kc == 0x36 || kc == 0x1e || kc == 0)
+			return;
 		kb.keyPressed(kc);
-
-		if (updateMHz(markTime, totalExec)) {
-			markTime = System.currentTimeMillis();
-			totalExec = 0;
-		}
+		
 	}
 
 	long markTime = System.currentTimeMillis();
@@ -152,22 +150,26 @@ public class GuiComputer extends GuiScreen {
 	 * the items)
 	 */
 	protected void drawGuiForegroundLayer() {
+		if (updateMHz(markTime, totalExec)) {
+			markTime = System.currentTimeMillis();
+			totalExec = 0;
+		}
 		// this.fontRendererObj.drawString("Computer", 8, 6, 4210752);
 		// Minecraft.getMinecraft().renderEngine.getTexture(par1ResourceLocation)
-		int k = (this.width - xSize) / 2;
-		int l = (this.height - ySize) / 2;
+		int k = (this.width - (int)(xSize * scale)) / 2;
+		int l = (this.height - (int)(ySize * scale)) / 2;
 		TextureUtil
 				.uploadTextureImage(TextureUtil.glGenTextures(), card.buffer);
-		this.drawTexturedRect(k + 4, l + 4, xSize - 8, ySize - 8);
+		this.drawTexturedRect(k + (int)(4 * scale), l + (int)(4 * scale), (int)(xSize * scale) - (int)(8 * scale), (int)(ySize * scale) - (int)(8 * scale));
 	}
 
 	protected void drawGuiBackgroundLayer() {
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 		Minecraft.getMinecraft().getTextureManager()
 				.bindTexture(field_147017_u);
-		int k = (this.width - xSize) / 2;
-		int l = (this.height - ySize) / 2;
-		this.drawTexturedRect(k, l, xSize, ySize);
+		int k = (this.width - (int)(xSize * scale)) / 2;
+		int l = (this.height - (int)(ySize * scale)) / 2;
+		this.drawTexturedRect(k, l, (int)(xSize * scale), (int)(ySize * scale));
 		// this.drawGradientRect(0, 0, this.width, this.height, -1072689136,
 		// -804253680);
 	}
