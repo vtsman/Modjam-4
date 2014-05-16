@@ -43,7 +43,7 @@ public class BlockComputer extends Block {
 	public boolean onBlockActivated(World w, int x, int y, int z,
 			EntityPlayer p, int meta, float hX, float hY, float hZ) {
 		String[] args = new String[] { "-boot", "cdrom", "-cdrom",
-				"/Users/Spencer/Documents/SLU.iso" };
+				"/Users/Spencer/Documents/dsl.iso" };
 
 		if (pc == null) {
 			try {

@@ -70,9 +70,33 @@ public class GuiComputer extends GuiScreen {
 		else{
 			kb.keyReleased((byte) 0x1e);
 		}
+		
 		if('a' <= par1 && 'z' >= par1){
 			par1 += 'A' - 'a';
 		}
+		switch(par1){
+		case ':': par1 = ';'; break;
+		case '"': par1 = '\''; break;
+		case '<': par1 = ','; break;
+		case '>': par1 = '.'; break;
+		case '?': par1 = '/'; break;
+		case '|': par1 = '\\'; break;
+		case '{': par1 = '['; break;
+		case '}': par1 = ']'; break;
+		case '!': par1 = '1'; break;
+		case '@': par1 = '2'; break;
+		case '#': par1 = '3'; break;
+		case '$': par1 = '4'; break;
+		case '%': par1 = '5'; break;
+		case '^': par1 = '6'; break;
+		case '&': par1 = '7'; break;
+		case '*': par1 = '8'; break;
+		case '(': par1 = '9'; break;
+		case ')': par1 = '0'; break;
+		case '_': par1 = '-'; break;
+		case '+': par1 = '='; break;
+		}
+		
 		byte kc = KeyTable.getScancode(Integer.valueOf(KeyStroke.getKeyStroke(par1, 0).getKeyCode()));
 		System.out.println(par1 + ":" + KeyStroke.getKeyStroke(par1, 0).getKeyCode() + ":" + kc);
 		kb.keyPressed(kc);
