@@ -15,6 +15,7 @@ import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.texture.TextureUtil;
 import net.minecraft.client.resources.I18n;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ContainerChest;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.util.ResourceLocation;
@@ -43,11 +44,12 @@ public class GuiComputer extends GuiScreen {
 	
 	DefaultVGACard card;
 	Keyboard kb;
-	
-	public GuiComputer(DefaultVGACard vga, Keyboard kb) {
+	EntityPlayer p;
+	public GuiComputer(DefaultVGACard vga, Keyboard kb, EntityPlayer p) {
 		super();
 		card = vga;
 		this.kb = kb;
+		this.p = p;
 		// this.
 	}
 
@@ -58,7 +60,7 @@ public class GuiComputer extends GuiScreen {
 
 	@Override
 	public void keyTyped(char par1, int par2) {
-		
+		super.keyTyped(par1, par2);
 		if(this.isShiftKeyDown()){
 			kb.keyPressed((byte) 0x36);
 		}

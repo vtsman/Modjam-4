@@ -20,7 +20,7 @@ public class GuiHandler implements IGuiHandler{
 	public Object getClientGuiElement(int ID, EntityPlayer player, World world,
 			int x, int y, int z) {
 		switch(ID){
-			case computerGuiID: return new GuiComputer(BlockComputer.vga, BlockComputer.kb);
+			case computerGuiID: return new GuiComputer(BlockComputer.vga, BlockComputer.kb, player);
 			default: return null;
 		}
 	}
