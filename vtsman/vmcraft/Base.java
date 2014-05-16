@@ -6,6 +6,8 @@ import vtsman.vmcraft.proxy.Common;
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.SidedProxy;
@@ -29,6 +31,8 @@ public class Base
     public static Base instance;
     
     public static Block computer;
+  
+    public static Item drive;
     
     public static File config;
     public static File minecraftFolder;
@@ -68,6 +72,15 @@ public class Base
 		
 		LanguageRegistry.instance().addStringLocalization("itemGroup.VMCraft",
 				"en_US", "VMCraft");
+		
+		drive = new ItemDrive();
+		GameRegistry.registerItem(drive, "VMItemDrive");
+		//LanguageRegistry.addName("item.item.VMItemDrive0.name", "CD");
+		LanguageRegistry.addName("item.item.VMItemDrive1", "Floppy Disk");
+		LanguageRegistry.addName("item.VMItemDrive2.name", "Hard Drive");
+		drive.setCreativeTab(tab);
+		
+		
     	
     	computer = new BlockComputer();
         GameRegistry.registerBlock(computer, "Computer");
