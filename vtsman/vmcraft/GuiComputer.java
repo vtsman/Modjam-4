@@ -31,7 +31,7 @@ import org.lwjgl.opengl.GL11;
 public class GuiComputer extends GuiScreen {
 
 	protected int xSize = 176;
-	protected int ySize = 166;
+	protected int ySize = 249;
 
 	private static final ResourceLocation field_147017_u = new ResourceLocation(
 			"vmcraft", "textures/gui/computerGui.png");
@@ -159,6 +159,7 @@ public class GuiComputer extends GuiScreen {
 		TextureUtil
 				.uploadTextureImage(TextureUtil.glGenTextures(), card.buffer);
 		// this.drawTexturedModalRect(k - 4, l - 4, 0, 0, xSize + 4, ySize + 4);
+		System.out.println(card.buffer.getWidth());
 		//this.drawTexturedRect(0, 0, 0, 0, this.width, this.height,
 		//		card.buffer.getWidth() / 2, card.buffer.getHeight() / 2);
 		this.drawTexturedRect(k + 4, l + 4, xSize - 8, ySize - 8);
@@ -168,9 +169,9 @@ public class GuiComputer extends GuiScreen {
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 		Minecraft.getMinecraft().getTextureManager()
 				.bindTexture(field_147017_u);
-		int k = (int) ((this.width) / 2);
-		int l = (int) ((this.height) / 2);
-		this.drawTexturedRect(k, l, (int)(xSize * 2f), (int)(ySize * 2f));
+		int k = (this.width - xSize) / 2;
+		int l = (this.height - ySize) / 2;
+		this.drawTexturedRect(k, l, xSize, ySize);
 		// this.drawGradientRect(0, 0, this.width, this.height, -1072689136,
 		// -804253680);
 	}
