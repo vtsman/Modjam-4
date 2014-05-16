@@ -162,16 +162,16 @@ public class GuiComputer extends GuiScreen {
 		System.out.println(card.buffer.getWidth());
 		//this.drawTexturedRect(0, 0, 0, 0, this.width, this.height,
 		//		card.buffer.getWidth() / 2, card.buffer.getHeight() / 2);
-		this.drawTexturedRect(k - 4, l - 4, xSize + 4, ySize + 4);
+		this.drawTexturedRect(k + 4, l + 4, xSize - 8, ySize - 8);
 	}
 
 	protected void drawGuiBackgroundLayer() {
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 		Minecraft.getMinecraft().getTextureManager()
 				.bindTexture(field_147017_u);
-		int k = (this.width - xSize) / 2;
-		int l = (this.height - ySize) / 2;
-		this.drawTexturedModalRect(k, l, 0, 0, xSize, ySize);
+		int k = (int) ((this.width - xSize * 1.5) / 2);
+		int l = (int) ((this.height - ySize * 1.5) / 2);
+		this.drawTexturedRect(k, l, (int)(xSize * 1.5f), (int)(ySize * 1.5f));
 		// this.drawGradientRect(0, 0, this.width, this.height, -1072689136,
 		// -804253680);
 	}
