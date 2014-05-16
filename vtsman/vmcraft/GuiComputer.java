@@ -181,4 +181,15 @@ public class GuiComputer extends GuiScreen {
         Display.setTitle("Minecraft - VM running at " + mhz + " MHz");
         return true;
     }
+	
+	@Override
+	public void onGuiClosed(){
+		Display.setTitle("Minecraft");
+	}
+	
+	@Override
+	protected void mouseClicked(int par1, int par2, int par3){
+		super.mouseClicked(par1, par2, par3);
+		kb.putMouseEvent(par1, par2, 0, par3);
+	}
 }
