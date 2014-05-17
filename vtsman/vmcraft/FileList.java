@@ -67,10 +67,10 @@ public class FileList extends GuiListExtended{
     @Override
     protected void drawBackground() {}
     
-    @Override
+   /* @Override
     protected void drawContainerBackground(Tessellator tessellator)
     {
        
-    }
+    }*/
 
 }
