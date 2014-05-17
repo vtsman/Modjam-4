@@ -1,5 +1,6 @@
 package vtsman.vmcraft;
 
+import java.io.File;
 import java.util.List;
 
 import cpw.mods.fml.relauncher.Side;
@@ -43,8 +44,18 @@ public class ItemDrive extends Item {
     }
 	
 	@SideOnly(Side.CLIENT)
-    public void addInformation(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, List par3List, boolean par4) {
-		
+    public void addInformation(ItemStack st, EntityPlayer par2EntityPlayer, List l, boolean par4) {
+		String s = (String) l.get(0);
+		l.clear();
+		l.add(s);
+		if(st.stackTagCompound != null){
+			if(st.stackTagCompound.hasKey("path")){
+				String s1 = st.stackTagCompound.getString("path");
+				l.add("§a" + s1.substring(s1.lastIndexOf("/") + 1));
+				return;
+			}
+		}
+		l.add("§4No image found");
 	}
 
     @SideOnly(Side.CLIENT)
