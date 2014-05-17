@@ -28,6 +28,7 @@ public class BlockComputer extends Block {
 	public static JPC jpc = null;
 	public static DefaultVGACard vga = null;
 	public static Keyboard kb = null;
+
 	public BlockComputer() {
 		super(Material.iron);
 		this.setHardness(1f);
@@ -43,8 +44,9 @@ public class BlockComputer extends Block {
 	@Override
 	public boolean onBlockActivated(World w, int x, int y, int z,
 			EntityPlayer p, int meta, float hX, float hY, float hZ) {
-		String[] args = new String[] { "-boot", "cdrom", "-cdrom",
-				"/Users/Spencer/Documents/dsl.iso" };
+		// String[] args = new String[] { "-boot", "cdrom", "-cdrom",
+		String[] args = new String[] { "-cdrom",
+				"/Users/Spencer/Documents/SLU.iso" };
 
 		if (pc == null) {
 			try {
@@ -56,7 +58,7 @@ public class BlockComputer extends Block {
 			PCMonitorFrame frame = new PCMonitorFrame("hi", pc, args);
 			frame.validate();
 			frame.setVisible(false);
-			//frame.setBounds(100, 100, 760, 500);
+			// frame.setBounds(100, 100, 760, 500);
 			frame.start();
 			// new Thread(new PCThread(pc)).start();
 			// DefaultVGACard vga = (DefaultVGACard) pc
@@ -64,11 +66,12 @@ public class BlockComputer extends Block {
 			// vga.setMonitor(mon);
 			// mon.setSize(100, 100);
 			// mon.setVisible(true);
-			vga = (DefaultVGACard) BlockComputer.pc.getComponent(DefaultVGACard.class);
+			vga = (DefaultVGACard) BlockComputer.pc
+					.getComponent(DefaultVGACard.class);
 			kb = (Keyboard) BlockComputer.pc.getComponent(Keyboard.class);
 		}
 		p.openGui(Base.instance, GuiHandler.computerGuiID, w, x, y, z);
-		
+
 		return true;
 	}
 
